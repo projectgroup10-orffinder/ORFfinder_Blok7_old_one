@@ -11,7 +11,7 @@ public class codonTable {
      * @return returns HashMap with codons as key and ammino acid as value
      */
     public static HashMap makeCodonTable(HashMap CodonTable){
-        System.out.println("Codontabel");
+
         CodonTable.put("GCA","A");
         CodonTable.put("GCC","A");
         CodonTable.put("GCG","A");
