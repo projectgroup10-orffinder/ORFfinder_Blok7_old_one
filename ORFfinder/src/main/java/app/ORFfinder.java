@@ -18,7 +18,7 @@ public class ORFfinder {
     static String sequence;
 
     private static ArrayList<ArrayList<Integer>> orfs;
-    private static HashMap<Integer, ArrayList<String>> resultsMap;
+    static HashMap<Integer, ArrayList<String>> resultsMap;
     private static HashMap<String, String> CodonTable = new HashMap<>();
 
     public static void main(String[] args) {
@@ -32,7 +32,9 @@ public class ORFfinder {
 
         frame.setTitle("ORF finder application");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         frame.pack();
+        frame.setSize(1000,800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
@@ -122,7 +124,6 @@ public class ORFfinder {
      * @return returns an ArrayList containing an ArrayList of the starting and stopping positions of the found ORFs
      */
     public static ArrayList findORFs(String sequence, ArrayList orfs, int start, int minDistance, boolean startIsATG){
-        System.out.println("findORFS");
 
         int startIndex=start;
 
@@ -260,10 +261,16 @@ public class ORFfinder {
 
     static void exportORFtoCSV() {
         try {
-            outputFile = new File("C:\\Users\\sschr\\OneDrive\\Documenten\\Related Genes.csv");
+            outputFile = new File("C:\\Users\\sschr\\OneDrive\\Documenten\\ORFfinder_foundORFs.csv");
             bw = new BufferedWriter(new FileWriter(outputFile));
-            bw.write("ORF ID" + ", "+ "DNA sequence"+ ", " + "Start position"+ ", " + "Stop position"+  "\n");
-            //for (resultsMap.Entry<String, Object> entry : resultsMap.entrySet()) {
+            bw.write("Start position"+ ", " + "Stop position"+ ","+ "DNA sequence" + ","+ "Amino acid sequence" + "\n");
+
+
+            for(ArrayList value : resultsMap.values()) {
+                String ORF = String.join(",", value+"\n");
+                bw.write(ORF);
+            }
+            //for (resultsMap.entry<Integer, Object> entry : resultsMap.entrySet()) {
                 //String key = entry.getKey();
                 //Object value = entry.getValue();
                 // ...
